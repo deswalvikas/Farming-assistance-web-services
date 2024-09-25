@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 150px;
+            font-family: Arial, sans-serif;
+            background-image: url('https://stmaaprodfwsite.blob.core.windows.net/assets/sites/1/2014/08/7309396-storm-clouds.jpg'); /* Replace with your image URL */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            text-align: center;
+           
+            color: black;
+        }
+        .weather-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Check the Weather</h1>
+        <form action="weather.php" method="POST">
+            <input type="text" name="city" placeholder="Enter City">
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weather-data">
+            <!-- Weather information will be displayed here -->
+        </div>
+    </div>
+</body>
+</html>
+
+

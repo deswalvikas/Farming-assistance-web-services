@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        background-image: url('https://i.ytimg.com/vi/jUujtaKvj-4/maxresdefault.jpg');
+    }
+    
+    h1, h2 {
+        text-align: center;
+        font-size: 30px; /* Set the base font size */
+        color: black; /* Default color */
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        margin-bottom: 15px;
+        transition: color 0.3s ease; /* Smooth transition effect for hover */
+    }
+    
+    form {
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    form label {
+        display: block;
+        margin-bottom: 18px;
+    }
+    
+    form input, form textarea, form select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    form button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    form button:hover {
+        background-color: #885121;
+    }
+    
+    table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: white;
+        border-radius: 8px;
+    }
+    
+    table th, table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+    
+    table th {
+        background-color: #f8f8f8;
+    }
+    
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Product Management</h1>
+
+    <!-- Form for adding products -->
+    <form id="productForm">
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" required>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="pest">Pest</option>
+            <option value="fertilizer">Fertilizer</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+
+        <button type="submit">Add Product</button>
+    </form>
+
+    <!-- Table for displaying products -->
+    <h2>Product List</h2>
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Products will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const productForm = document.getElementById('productForm');
+        const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+    
+        // Fetch and display products on page load
+        fetchProducts();
+    
+        // Handle form submission
+        productForm.addEventListener('submit', function (event) {
+            event.preventDefault();  // Prevent page reload on form submission
+    
+            const formData = new FormData(productForm);
+    
+            // Send POST request to add the product
+            fetch('techniques.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);  // Show the response message (success or error)
+                updateTable(data.products);  // Update the table with the latest products
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    
+        // Function to fetch all products from the server
+        function fetchProducts() {
+            fetch('techniques.php')
+            .then(response => response.json())
+            .then(data => {
+                updateTable(data.products);  // Populate table with fetched products
+            })
+            .catch(error => console.error('Error fetching products:', error));
+        }
+    
+        // Function to update the product table
+        function updateTable(products) {
+            productTable.innerHTML = '';  // Clear existing table rows
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.product_name}</td>
+                    <td>${product.type}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price}</td>
+                `;
+                productTable.appendChild(row);
+            });
+        }
+    });
+    </script>
+</body>
+</html>

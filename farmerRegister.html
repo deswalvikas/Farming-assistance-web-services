@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="farmerRegister.css">
+    <title>Farmer Registeration</title>
+</head>
+<body>
+    <div class="signup-form">
+        <h1> Farmer Registeration </h1>
+        <div class="txt">
+            <form action="FarmerPage.html" method="POST">
+               
+                <input type="Id" placeholder="farmer_id" required="" name="Farmer_id">
+        </div>
+        <div class="txt">
+                
+                <input type="text" placeholder="farmer_name" required="" name="Farmer_name">
+        </div>
+        <div class="txt">
+                
+                <input type="textarea" placeholder="farmer_address" required="" name="Farmer_address">
+        </div>
+         <div class="txt">
+                
+                <input type="phone" placeholder="farmer_contact" required="" name="Farmer_no">
+        </div>
+
+        <div class="txt">
+               
+                <input type="password" placeholder="farmer_password" required="" name="Password">
+        </div>
+        <div class="txt">
+                
+                <input type="password" placeholder="Confirm farmer_password "  required=""  name="CPassword">
+        </div>
+            <button class="btn" name="btn"> Signup </button>
+         <div class="txt">
+                <p>Already registered ? <a href="farmerLogin.html"> Login </p>
+            </div>
+
+        </form>
+    </div>
+    <input type="button" value="Go back!" onclick="history.back()">
+</body>
+</html>
